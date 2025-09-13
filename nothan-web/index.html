@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion | NOTHAN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Orbitron', sans-serif;
+            overflow: hidden;
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 10px #9d4edd, 0 0 20px #c77dff;
+        }
+        
+        .glow-box {
+            box-shadow: 0 0 15px #9d4edd, 0 0 30px #c77dff;
+        }
+        
+        .input-field {
+            background: rgba(20, 20, 40, 0.7);
+            border: 1px solid #9d4edd;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            box-shadow: 0 0 10px #9d4edd;
+            border-color: #c77dff;
+        }
+        
+        .btn-login {
+            background: linear-gradient(45deg, #7b2cbf, #e0aaff);
+            transition: all 0.3s;
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px #c77dff;
+        }
+        
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <div id="vanta-bg"></div>
+    
+    <div class="min-h-screen flex items-center justify-center px-4">
+        <div class="w-full max-w-md p-8 rounded-lg backdrop-blur-sm bg-black/30 glow-box" data-aos="fade-up">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold mb-2 glow-text">NOTHAN</h1>
+                <p class="text-purple-300">Accès sécurisé</p>
+            </div>
+            
+            <form action="/login/login.php" method="POST" class="space-y-6">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-purple-300 mb-1">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="username" required 
+                           class="w-full px-4 py-3 rounded-lg input-field glow-text" 
+                           placeholder="Entrez votre identifiant">
+                </div>
+                
+                <div>
+                    <label for="password" class="block text-sm font-medium text-purple-300 mb-1">Mot de passe</label>
+                    <input type="password" id="password" name="password" required 
+                           class="w-full px-4 py-3 rounded-lg input-field glow-text" 
+                           placeholder="••••••••">
+                </div>
+                
+                <button type="submit" 
+                        class="w-full py-3 px-4 rounded-lg font-bold btn-login glow-text flex items-center justify-center">
+                    <i data-feather="log-in" class="mr-2"></i> SE CONNECTER
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        VANTA.NET({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x9d4edd,
+            backgroundColor: 0x0,
+            points: 12.00,
+            maxDistance: 22.00,
+            spacing: 18.00
+        });
+        
+        feather.replace();
+        
+        // Add twinkling stars
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.body;
+            const starCount = 100;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                
+                // Random size
+                const size = Math.random() * 3;
+                
+                // Random opacity
+                const opacity = Math.random();
+                
+                // Random animation duration
+                const duration = 2 + Math.random() * 3;
+                
+                star.style.cssText = `
+                    position: absolute;
+                    top: ${y}%;
+                    left: ${x}%;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: white;
+                    border-radius: 50%;
+                    opacity: ${opacity};
+                    animation: twinkle ${duration}s infinite alternate;
+                    z-index: -1;
+                `;
+                
+                container.appendChild(star);
+            }
+            
+            // Add CSS for twinkling animation
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes twinkle {
+                    0% { opacity: 0.2; }
+                    100% { opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>
